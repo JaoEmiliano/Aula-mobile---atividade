@@ -6,7 +6,7 @@ export const AuthContext = createContext({});
 
 interface AuthContextType {
   user: { email: string; name: string } | null;
-  login: (email: string) => void;
+  login: (email: string, name: string) => Promise<void>; // foi add promise para refletir a natureza assíncrona do login
   logout: () => void;
   isLoading: boolean;
 }

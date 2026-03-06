@@ -19,16 +19,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setIsLoading(false);
     }; 
     loadUser();
-  }, []);
-  const login = async (email: string) => { 
-    const newUser = { email, name: "Allan Silva" };
+  }, []); // executa uma unica vez ao montar o componente para carregar o usuário do AsyncStorage
+  const login = async (email: string, name: string) => { 
+    const newUser = { email, name};
     setUser(newUser);
     await asyncStorage.setItem("user", JSON.stringify(newUser));
-  }
-
+  } //alteracao realizada para armazenar o usuario logado no asyncStorage para persistencia dos dados, alem de receber o nome do usuario para armazenar junto com o email
   const logout = async () => {
-    setUser(null);
-    await asyncStorage.removeItem("user");
+    setUser(null); // remove o user do react state
+    await asyncStorage.removeItem("user"); // remove o user do AsyncStorage para garantir que ele não seja carregado novamente
   }
 
   return (
